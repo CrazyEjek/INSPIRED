@@ -3,6 +3,7 @@ import { Header } from '../Components/Header/Header.jsx';
 import { Main } from '../Components/Layout/Main/Main.jsx';
 import { Footer } from '../Components/Footer/Footer.jsx';
 
+
 const list = [
     {link: 'women', title: 'Женщины', 
     categories: [
@@ -12,7 +13,7 @@ const list = [
             { link: 'bathrobes', title: 'Халаты'},
             { link: 'thermal', title: 'Термобелье'},
             { link: 'pijams', title: 'Пижамы'},
-            // мб тут везде ""  !!!???
+
     ]},
     {link: 'men', title: 'Мужчины', 
     categories: [
