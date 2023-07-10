@@ -19,7 +19,7 @@ export  const Navigation = () => {
     }, [gender, dispatch]);
     return (
     <nav>
-        <Container>
+        <Container >
             <Gender />
             <Category />
         </Container>

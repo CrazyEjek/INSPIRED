@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { COLORS_URL } from './assets/const.js';
+import { COLORS_URL } from './const.js';
 
 export const fetchColors = createAsyncThunk(
 	"colors/fetchColors",
@@ -31,7 +31,7 @@ const colorsSlice = createSlice({
 			.addCase(fetchColors.rejected, (state, action) => {
 				state.status = 'failed';
 				state.error = action.error.message;
-			})
+			});
 	}
 });
 
