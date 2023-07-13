@@ -1,12 +1,13 @@
 import { Container } from '../Layout/Container/Container';
 import s from './Banner.module.scss';
 import { NavLink } from 'react-router-dom';
-import { API_URL } from '../../features/const';
+import { API_URL } from '../../features/const.js';
 
-export const Banner = ({ data }) => {
+export const Banner = ({data}) => (
         data &&
           <section className={s.banner}
-           style={{ backgroundImage:`url(${API_URL}${data.bg.desktop})`}}
+           style={{ backgroundImage:`url(${API_URL}/${data.bg.desktop})`
+          }}
            >
             <Container>
           <div className={s.content}>
@@ -17,4 +18,4 @@ export const Banner = ({ data }) => {
           </div>
         </Container>
       </section>
-};
+);
