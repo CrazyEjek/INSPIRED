@@ -9,12 +9,19 @@ import { API_URL } from '../../features/const.js';
 import {ColorList} from '../ColorList/ColorList.jsx';
 import { ReactComponent as Like}  from '../../assets/heart.svg';
 import { Count } from '../Count/Count.jsx';
+import { ProductSize } from './ProductSize/ProductSize.jsx';
+import { Goods } from '../Goods/Goods.jsx'
+import { fetchCategory } from '../../features/goodsSlice.js';
 
 export const ProductPage = () => {
     const dispatch = useDispatch();
     const {id} = useParams();
     const {product} = useSelector(state => state.product);
+
+    const {gender, category} = product;
     const [count, setCount] = useState(1);
+    const [selectedSize, setSelectedSize] = useState('');
+
 
     const handleIncrement = () => {
             setCount((prevCount) => prevCount +1)
@@ -30,18 +37,31 @@ export const ProductPage = () => {
     const [selectedColor, setSelectedColor] = useState('');
     const handleColorChange = (e) => {
         setSelectedColor(e.target.value);
+    };
+
+    // функция выбора размера товара
+    const handleSizeChange = (e) => {
+        setSelectedSize(e.target.value);
     }
 
     // получение айдишника товара
     useEffect (() => {
         dispatch(fetchProduct(id));
     }, [id, dispatch]);
+
+    // в категории вам может понравится сортировка по полу или категории, 4 товара в линию и исключение повтора товара
+    
+    useEffect (() => {
+        dispatch(fetchCategory({gender, category, count:4, top: true, exclude: id }));
+    }, [gender, category, id, dispatch])     
      
     return (
+       <>
        <section className={s.card}>
-           {/* тут надо посмотреть внимательней, ссылка на картинку!!!! */}
             <Container className={s.container}>
-                <img src={`${API_URL}/${product?.pic}`} alt={`${product.title} ${product.description}`} />
+                <img className={s.image} 
+                src={`${API_URL}/${product?.pic}`} 
+                alt={`${product.title} ${product.description}`} />
                 <form className={s.content}>
                     <h2 className={s.title}>{product.title}</h2>
                     <p className={s.price}>{product.price} руб</p>
@@ -59,18 +79,19 @@ export const ProductPage = () => {
                        />
                     </div>
 
-
-                                  {/* Home work todo
-                            <ProductSize size={product.size}>
-                            <form action=""></form>
-                            </ProductSize> */}
-
                             <div className={s.description}>
                                 <p className={cn(s.subtitle, s.descriptionTitle)}>Описание</p>
                                 <p className={s.descriptionText}>{product.description}</p>
                             </div>
 
-                                <div className={s.control}>
+                                    <ProductSize
+                                    size={product.size}
+                                    selectedSize={selectedSize}
+                                    handleSizeChange={handleSizeChange}
+                                    />
+
+
+                                    <div className={s.control}>
                                     <Count
                                     className={s.count}
                                     count={count}
@@ -86,6 +107,8 @@ export const ProductPage = () => {
                 </form>
             </Container>
        </section>
-    )
+            <Goods title='Вам также может понравиться'/>
+       </>
+    );
 };
 
