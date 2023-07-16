@@ -11,13 +11,9 @@ export const Goods = ({ categoryData }) => {
         <section className={s.goods}>
         <Container>
         <h2 className={s.title}>{title}</h2>
-            <ul className={s.list}>
-                {goodsList.map(item => (
-                <li key={item.id}>
-                    <Product {...item}/>
-                </li>
-                ))}
-            </ul>
+				<ul className={s.list}>
+					{goodsList.map(item => <li key={item.id} > <Product  {...item} /> </li>)}
+				</ul>
         </Container> 
         </section>
     )

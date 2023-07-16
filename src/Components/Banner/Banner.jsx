@@ -9,8 +9,9 @@ export const Banner = ({data}) => {
   const isMobile = useMedia('(max-width: 540px)');
   const isTablet = useMedia('(max-width: 768px)');
   const isLaptop = useMedia('(max-width: 1024px)');
+  // eslint-disable-next-line no-unused-vars
   const [bgURL, setBgURL] = useState('');
-  
+
 useEffect(() => {
   if (isMobile) {
   setBgURL(`${API_URL}${data?.bg.mobile}`);

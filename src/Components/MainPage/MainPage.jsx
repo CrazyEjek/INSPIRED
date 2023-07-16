@@ -4,7 +4,7 @@ import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { fetchCategory, fetchGender } from '../../features/goodsSlice';
 import { setActiveGender } from '../../features/navigationSlice';
-import { Goods } from '../Goods/Goods';
+import { Goods } from '../Goods/Goods.jsx';
 import { Banner} from '../Banner/Banner.jsx';
 
 
